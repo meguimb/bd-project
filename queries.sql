@@ -1,14 +1,18 @@
 -- Qual o nome do retalhista (ou retalhistas) responsáveis pela reposição do maior número de categorias? 
 SELECT nome
-FROM retalhista
-INNER JOIN responsavel_por
-ON (retalhista.tin = responsavel_por.tin)
-GROUP BY nome_cat
-ORDER BY COUNT(*) DESC
-LIMIT 1;
+FROM (SELECT nome, COUNT(DISTINCT nome_cat) AS num_cat
+      FROM retalhista
+      INNER JOIN responsavel_por
+      ON (retalhista.tin = responsavel_por.tin)
+      GROUP BY nome) AS a
+WHERE num_cat >= ALL (SELECT COUNT(DISTINCT nome_cat)
+                      FROM retalhista
+                      INNER JOIN responsavel_por
+                      ON (retalhista.tin = responsavel_por.tin)
+                      GROUP BY nome);
 
 -- Qual o nome do ou dos retalhistas que são responsáveis por todas as categorias simples? 
-SELECT nome
+SELECT DISTINCT nome
 FROM retalhista
 INNER JOIN responsavel_por
 ON (retalhista.tin = responsavel_por.tin)
