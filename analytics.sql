@@ -8,10 +8,10 @@ GROUP BY ROLLUP(dia_semana, concelho)
 ORDER BY dia_semana, concelho; 
 
 /*Número total de artigos vendidos num dado distrito (i.e. “Lisboa”), 
-por concelho, dia da semana e no total*/
+por concelho, categoria, dia da semana e no total*/
 
-SELECT concelho, cat, SUM(unidades)
+SELECT concelho, cat, dia_semana, SUM(unidades)
 FROM Vendas
-WHERE distrito = ‘Lisboa’
-GROUP BY ROLLUP(concelho, cat)
-ORDER BY concelho, cat;
+WHERE distrito = 'Lisboa'
+GROUP BY ROLLUP(concelho, cat, dia_semana)
+ORDER BY concelho, cat, dia_semana;
