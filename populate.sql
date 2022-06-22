@@ -249,6 +249,4 @@ insert into responsavel_por values ('Bebidas Quentes', 'com', 4, 'Laura');
 insert into responsavel_por values ('Bolachas', 'neg', 4, 'Laura');
 insert into responsavel_por values ('Cereais', 'com', 4, 'Laura');
 
-insert into evento_reposicao values ('3', 01, 1, 'Margarida', '05-08-2022T10:33:22', 20, 'com');fabricante, instante)
-);
-
+insert into evento_reposicao values ('3', 01, 1, 'Margarida', '05-08-2022T10:33:22', 20, 'com');
