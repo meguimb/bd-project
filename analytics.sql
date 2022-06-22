@@ -3,7 +3,7 @@ por dia da semana, por concelho e no total*/
 
 SELECT dia_semana, concelho, SUM(unidades)
 FROM Vendas
-WHERE ano < 2020 AND ano > 2022
+WHERE ano > 2020 AND ano < 2022
 GROUP BY ROLLUP(dia_semana, concelho)
 ORDER BY dia_semana, concelho; 
 
