@@ -1,0 +1,36 @@
+<doctype html>
+    <title>Análises</title>
+    <body style= "padding:20px">
+    
+        <h1>Menu Análises</h1>
+       
+        <div id="tabela">
+            <button onclick="window.location.href='menu'">Menu principal</button>
+            <button onclick="window.location.href='retalhista/inserir'">Inserir Retalhista</button>
+        {% if cursor %}
+        <table id="menu">
+            <thead>
+            <tr>
+            <th> TIN </th>
+            <th> Nome </th>
+            </tr>
+        </thead>
+        {% for record in cursor %}
+        <tr>
+            <td> {{ record[0] }} </td>
+            <td> {{ record[1] }} </td>
+            <td><a href= "retalhista/remover?tin={{ record[0]}}&nome={{ record[1]}}"> Remover </a></td >
+        </tr>
+        {% endfor %} 
+        </table>
+        </div>
+        {% else %}
+        <p> Erro: não foi possível obter dados da base de dados! </p>
+        {% endif %}
+    </body>
+    </doctype>
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+    </script>
