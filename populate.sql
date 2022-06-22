@@ -103,7 +103,7 @@ CREATE TABLE planograma (
 -- NOTA: TIN, que tipo de dados é? o TIN depende do país
 CREATE TABLE retalhista (
 	tin VARCHAR(50) UNIQUE NOT NULL,
-	name VARCHAR(255) UNIQUE NOT NULL,
+	nome VARCHAR(255) UNIQUE NOT NULL,
 	PRIMARY KEY (tin)
 );
 
@@ -237,16 +237,17 @@ insert into responsavel_por values ('Cereais', 'nest', 1, 'Margarida');
 
 insert into responsavel_por values ('Bebidas Frias', 'neg', 2, 'Gonçalo');
 insert into responsavel_por values ('Bebidas Quentes', 'neg', 2, 'Gonçalo');
-insert into responsavel_por values ('Cereais', 'neg', 2, 'Gonçalo');
-insert into responsavel_por values ('Bolachas', 'neg', 2, 'Gonçalo');
+insert into responsavel_por values ('Cereais', 'nest', 2, 'Gonçalo');
+insert into responsavel_por values ('Bolachas', 'nest', 2, 'Gonçalo');
 
 insert into responsavel_por values ('Bebidas', 'com', 3, 'Nolten');
 insert into responsavel_por values ('Cereais', 'nest', 3, 'Nolten');
 
 insert into responsavel_por values ('Bebidas', 'com', 4, 'Laura');
-insert into responsavel_por values ('Bebidas Frias', 'com', 4, 'Laura');
-insert into responsavel_por values ('Bebidas Quentes', 'com', 4, 'Laura');
-insert into responsavel_por values ('Bolachas', 'neg', 4, 'Laura');
-insert into responsavel_por values ('Cereais', 'com', 4, 'Laura');
+insert into responsavel_por values ('Bebidas Frias', 'neg', 4, 'Laura');
+insert into responsavel_por values ('Bebidas Quentes', 'neg', 4, 'Laura');
+insert into responsavel_por values ('Bolachas', 'nest', 4, 'Laura');
+insert into responsavel_por values ('Cereais', 'nest', 4, 'Laura');
 
 insert into evento_reposicao values ('3', 01, 1, 'Margarida', '05-08-2022T10:33:22', 20, 'com');
+insert into evento_reposicao values ('8', 02, 1, 'Margarida', '20-01-2022T16:40:22', 10, 'nest');
