@@ -14,7 +14,7 @@ app = Flask(__name__)
 DB_HOST="db.tecnico.ulisboa.pt"
 DB_USER="ist199272" 
 DB_DATABASE=DB_USER
-DB_PASSWORD="MSofiaMP1"
+DB_PASSWORD="cats"
 DB_CONNECTION_STRING = "host=%s dbname=%s user=%s password=%s" % (DB_HOST, DB_DATABASE, DB_USER, DB_PASSWORD)
 
 
@@ -60,12 +60,12 @@ def inserir_retalhista():
 @app.route('/retalhista/remover')
 def remover_retalhista():
   try:
-    return render_template("remover_instituicao.html", params=request.args)
+    return render_template("remover_retalhista.html", params=request.args)
   except Exception as e:
     return str(e)
 
 @app.route('/retalhista/perform_delete', methods=["POST"])
-def delete_instituicao_fromDB():
+def remover_retalhista_daDB():
   dbConn=None
   cursor=None
   try:
@@ -76,7 +76,7 @@ def delete_instituicao_fromDB():
       DELETE FROM retalhista WHERE nome=%s AND tin=%s;"
     data = (request.form["tin"], request.form["tin"], request.form["nome"], request.form["tin"],)
     cursor.execute(query,data)
-    return redirect(url_for('retalhista'))
+    return render_template("retalhista.html", cursor=cursor, params=request.args)
   except Exception as e:
     return str(e) 
   finally:
@@ -84,9 +84,8 @@ def delete_instituicao_fromDB():
     cursor.close()
     dbConn.close()
 
-
 @app.route('/retalhista/executar_inserir', methods=["POST"])
-def inserir_retalhista():
+def executar_inserir_retalhista():
   dbConn=None
   cursor=None
   try:
@@ -95,10 +94,12 @@ def inserir_retalhista():
     query = "INSERT INTO retalhista VALUES (%s,%s);"
     data = (request.form["tin"],request.form["nome"],)
     cursor.execute(query,data)
-    return redirect(url_for('retalhista'))
+    return render_template("retalhista.html", cursor=cursor, params=request.args)
   except Exception as e:
-    return e
+    return str(e)
   finally:
     dbConn.commit()
     cursor.close()
     dbConn.close()
+
+CGIHandler().run(app)
