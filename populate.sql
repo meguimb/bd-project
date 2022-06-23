@@ -208,24 +208,24 @@ insert into prateleira values (03, 4, 'Laura', 10, 'Bebidas Frias');
 insert into prateleira values (04, 4, 'Laura', 10, 'Bebidas Quentes');
 insert into prateleira values (05, 4, 'Laura', 10, 'Bolachas');
 
-insert into planograma values ('3', 01, 1, 'Margarida', 10, 7, 'IST');
-insert into planograma values ('8', 02, 1, 'Margarida', 5, 7, 'IST');
-insert into planograma values ('9', 03, 1, 'Margarida', 8, 7, 'IST');
+insert into planograma values ('3', 01, 1, 'Margarida', 6, 12, 'IST');
+insert into planograma values ('8', 02, 1, 'Margarida', 3, 7, 'IST');
+insert into planograma values ('9', 03, 1, 'Margarida', 4, 7, 'IST');
 
-insert into planograma values ('1', 01, 2, 'Gonçalo', 10, 7, 'ESSMO');
-insert into planograma values ('4', 02, 2, 'Gonçalo', 10, 8, 'ESSMO');
-insert into planograma values ('11', 03, 2, 'Gonçalo', 10, 5, 'ESSMO');
-insert into planograma values ('5', 04, 2, 'Gonçalo', 10, 4, 'ESSMO');
-insert into planograma values ('6', 05, 2, 'Gonçalo', 10, 4, 'ESSMO');
+insert into planograma values ('1', 01, 2, 'Gonçalo', 7, 20, 'ESSMO');
+insert into planograma values ('4', 02, 2, 'Gonçalo', 8, 20, 'ESSMO');
+insert into planograma values ('11', 03, 2, 'Gonçalo', 5, 10, 'ESSMO');
+insert into planograma values ('5', 04, 2, 'Gonçalo', 4, 16, 'ESSMO');
+insert into planograma values ('6', 05, 2, 'Gonçalo', 4, 16, 'ESSMO');
 
-insert into planograma values ('2', 01, 3, 'Nolten', 10, 4, 'JÁCOME');
-insert into planograma values ('10', 02, 3, 'Nolten', 10, 4, 'JÁCOME');
+insert into planograma values ('2', 01, 3, 'Nolten', 4, 16, 'JÁCOME');
+insert into planograma values ('10', 02, 3, 'Nolten', 4, 16, 'JÁCOME');
 
-insert into planograma values ('9', 01, 4, 'Laura', 9, 10, 'SAC');
-insert into planograma values ('1', 02, 4, 'Laura', 9, 10, 'SAC');
-insert into planograma values ('2', 03, 4, 'Laura', 9, 10, 'SAC');
-insert into planograma values ('3', 04, 4, 'Laura', 9, 10, 'SAC');
-insert into planograma values ('7', 05, 4, 'Laura', 9, 10, 'SAC');
+insert into planograma values ('9', 01, 4, 'Laura', 2, 10, 'SAC');
+insert into planograma values ('1', 02, 4, 'Laura', 2, 10, 'SAC');
+insert into planograma values ('2', 03, 4, 'Laura', 2, 10, 'SAC');
+insert into planograma values ('3', 04, 4, 'Laura', 2, 10, 'SAC');
+insert into planograma values ('7', 05, 4, 'Laura', 2, 10, 'SAC');
 
 insert into retalhista values ('nest', 'Nestlé');
 insert into retalhista values ('neg', 'Negócio Local');
