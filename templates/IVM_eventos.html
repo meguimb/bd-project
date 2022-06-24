@@ -14,7 +14,7 @@
        
         <div id="tabela">
             <button onclick="window.history.go(-2)">Menu IVMs</button>
-        {% if cursor %}
+        {% if cursor1 %}
         <table id="eventos">
             <thead>
             <tr>
@@ -23,25 +23,35 @@
             <th> NRO </th>
             <th> EAN </th>
             <th> Instante </th>
-            <th> Categoria </th>
-            <th> Unidades </th>
             </tr>
         </thead>
-        {% for record in cursor %}
+        {% endif %}
+        {% for record in cursor1 %}
         <tr>
             <td> {{ record[0] }} </td>
             <td> {{ record[1] }} </td>
             <td> {{ record[2] }} </td>
             <td> {{ record[3] }} </td>
             <td> {{ record[4] }} </td>
-            <td> {{ record[5] }} </td>
-            <td> {{ record[6] }} </td>
+        </tr>
+        {% endfor %} 
+        </table>
+        {% if cursor2 %}
+        <table id="categorias">
+            <thead>
+            <tr>
+            <th> Categoria </th>
+            <th> Unidades </th>
+            </tr>
+        </thead>
+        {% endif %}
+        {% for record in cursor2 %}
+        <tr>
+            <td> {{ record[0] }} </td>
+            <td> {{ record[1] }} </td>
         </tr>
         {% endfor %} 
         </table>
         </div>
-        {% else %}
-        <p> Erro: não foi possível obter dados da base de dados! </p>
-        {% endif %}
     </body>
 </html>
