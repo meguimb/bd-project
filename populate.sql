@@ -249,5 +249,5 @@ insert into responsavel_por values ('Bebidas Quentes', 'neg', 4, 'Laura');
 insert into responsavel_por values ('Bolachas', 'nest', 4, 'Laura');
 insert into responsavel_por values ('Cereais', 'nest', 4, 'Laura');
 
-insert into evento_reposicao values ('3', 01, 1, 'Margarida', '05-08-2022T10:33:22', 20, 'com');
-insert into evento_reposicao values ('8', 02, 1, 'Margarida', '20-01-2022T16:40:22', 10, 'nest');
+insert into evento_reposicao values ('3', 01, 1, 'Margarida', '05-08-2022T10:33:22', 5, 'com');
+insert into evento_reposicao values ('8', 02, 1, 'Margarida', '20-01-2022T16:40:22', 3, 'nest');
