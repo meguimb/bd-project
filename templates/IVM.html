@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IVM</title>
+        <script>
+            function goBack() {
+              window.history.back();
+            }
+        </script>
+    </head>
+    <body style= "padding:20px">
+    
+        <h1>Menu IVMs</h1>
+       
+        <div id="tabela">
+            <button onclick="window.location.href='menu'">Menu principal</button>
+        {% if cursor %}
+        <table id="menu">
+            <thead>
+            <tr>
+            <th> Número Série </th>
+            <th> Fabricante </th>
+            </tr>
+        </thead>
+        {% for record in cursor %}
+        <tr>
+            <td> {{ record[0] }} </td>
+            <td> {{ record[1] }} </td>
+            <td><a href= "IVM/listar_eventos?num_serie={{ record[0]}}&fab={{ record[1]}}"> Eventos de Reposição </a></td >
+        </tr>
+        {% endfor %} 
+        </table>
+        </div>
+        {% else %}
+        <p> Erro: não foi possível obter dados da base de dados! </p>
+        {% endif %}
+    </body>
+</html>

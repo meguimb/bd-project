@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Eventos Reposição</title>
+        <script>
+            function goBack() {
+              window.history.back();
+            }
+        </script>
+    </head>
+    <body style= "padding:20px">
+    
+        <h1>Menu Eventos de Reposição</h1>
+       
+        <div id="tabela">
+            <button onclick="window.history.go(-2)">Menu IVMs</button>
+        {% if cursor %}
+        <table id="eventos">
+            <thead>
+            <tr>
+            <th> Número Série </th>
+            <th> Fabricante </th>
+            <th> NRO </th>
+            <th> EAN </th>
+            <th> Instante </th>
+            <th> Categoria </th>
+            <th> Unidades </th>
+            </tr>
+        </thead>
+        {% for record in cursor %}
+        <tr>
+            <td> {{ record[0] }} </td>
+            <td> {{ record[1] }} </td>
+            <td> {{ record[2] }} </td>
+            <td> {{ record[3] }} </td>
+            <td> {{ record[4] }} </td>
+            <td> {{ record[5] }} </td>
+            <td> {{ record[6] }} </td>
+        </tr>
+        {% endfor %} 
+        </table>
+        </div>
+        {% else %}
+        <p> Erro: não foi possível obter dados da base de dados! </p>
+        {% endif %}
+    </body>
+</html>
