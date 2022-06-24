@@ -210,6 +210,35 @@ def remover_categoria_daDB():
     cursor.close()
     dbConn.close()
 
+@app.route('/categoria/listar_subcategorias')
+def listar_subcategorias():
+  try:
+    return render_template("listar_subcategorias.html", params=request.args)
+  except Exception as e:
+    return str(e)
+
+@app.route('/categoria/executar_listar_subcategorias', methods=["POST"])
+def executar_listar_subcategorias():
+  dbConn=None
+  cursor=None
+  try:
+    dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+    cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+    query = "WITH RECURSIVE subcategoria AS (SELECT categoria AS sub FROM tem_outra WHERE super_categoria=%s \
+              UNION ALL \
+              SELECT categoria FROM subcategoria, tem_outra \
+              WHERE subcategoria.sub = tem_outra.super_categoria) \
+              SELECT * FROM subcategoria;"
+    data = (request.form["nome"],) 
+    cursor.execute(query,data)
+    return render_template("executar_listar_subcategorias.html", cursor=cursor, params=request.args)
+  except Exception as e:
+    return str(e)
+  finally:
+    dbConn.commit()
+    cursor.close()
+    dbConn.close()
+
 @app.route('/IVM')
 def listar_IVMs():
   dbConn=None
