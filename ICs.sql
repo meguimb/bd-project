@@ -61,11 +61,10 @@ CREATE OR REPLACE FUNCTION check_cat_produto_reposto_proc()
 RETURNS TRIGGER AS 
 $$ 
 DECLARE prod_categoria VARCHAR(255);
-DECLARE possiveis_categorias VARCHAR(255)[];
 BEGIN	
-    SELECT nome FROM prateleira WHERE nro=NEW.nro AND num_serie=NEW.num_serie AND fabricante=NEW.fabricante;
+    SELECT nome FROM prateleira WHERE nro=NEW.nro AND num_serie=NEW.num_serie AND fabricante=NEW.fabricante INTO prod_categoria;
 
-    IF prod_categoria NOT IN (SELECT nome FROM tem_categoria WHERE ean=NEW.ean) THEN			 				
+    IF prod_categoria NOT IN (SELECT categoria FROM tem_categoria WHERE ean=NEW.ean) THEN			 				
         RAISE EXCEPTION 'Um Produto só pode ser reposto numa Prateleira que apresente (pelo menos) uma das Categorias desse produto'; 
     END IF;	 		
 
