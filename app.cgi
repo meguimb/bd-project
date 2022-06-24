@@ -269,14 +269,19 @@ def executar_listar_eventos():
   try:
     dbConn = psycopg2.connect(DB_CONNECTION_STRING)
     cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-    query = "SELECT r.num_serie, r.fabricante, r.nro, r.ean, r.instante, p.nome, r.unidades \
+    cursor2 = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+    query = "SELECT r.num_serie, r.fabricante, r.nro, r.ean, r.instante, r.unidades \
+      FROM evento_reposicao AS r \
+      WHERE r.num_serie = %s;"
+    query2 = "SELECT p.nome, r.unidades \
       FROM evento_reposicao AS r INNER JOIN prateleira AS p \
       ON (r.nro = p.nro) AND (r.num_serie = p.num_serie) AND (r.fabricante = p.fabricante) \
       WHERE r.num_serie = %s \
-      GROUP BY p.nome, r.unidades, r.num_serie, r.fabricante, r.nro, r.ean, r.instante;"
+      GROUP BY p.nome, r.unidades;"
     data = (request.form["num_serie"],)
     cursor.execute(query,data)
-    return render_template("IVM_eventos.html", cursor=cursor, params=request.args)
+    cursor2.execute(query2,data)
+    return render_template("IVM_eventos.html", cursor1=cursor, cursor2=cursor2, params=request.args)
   except Exception as e:
     return str(e)
   finally:
