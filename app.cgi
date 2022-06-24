@@ -221,21 +221,26 @@ def listar_subcategorias():
 def executar_listar_subcategorias():
   dbConn=None
   cursor=None
+  subcategorias = []
+  por_explorar = [(request.form["nome"],)]
   try:
     dbConn = psycopg2.connect(DB_CONNECTION_STRING)
-    cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-    query = "WITH RECURSIVE subcategoria AS (SELECT categoria AS sub FROM tem_outra WHERE super_categoria=%s \
-              UNION ALL \
-              SELECT categoria FROM subcategoria, tem_outra \
-              WHERE subcategoria.sub = tem_outra.super_categoria) \
-              SELECT * FROM subcategoria;"
-    data = (request.form["nome"],) 
-    cursor.execute(query,data)
-    return render_template("executar_listar_subcategorias.html", cursor=cursor, params=request.args)
+
+    while(len(por_explorar)!=0):
+      cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+      query = "SELECT categoria FROM tem_outra WHERE super_categoria=%s"
+      cursor.execute(query, por_explorar[0])
+      del por_explorar[0]
+      categorias = cursor.fetchall()
+
+      for i in categorias:
+        subcategorias.append(i)
+        por_explorar.append(i)
+      cursor.close()
+    return render_template("executar_listar_subcategorias.html", cursor=subcategorias, params=request.args)
   except Exception as e:
     return str(e)
   finally:
-    dbConn.commit()
     cursor.close()
     dbConn.close()
 
