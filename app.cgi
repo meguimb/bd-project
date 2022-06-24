@@ -210,19 +210,48 @@ def remover_categoria_daDB():
     cursor.close()
     dbConn.close()
 
-@app.route('categoria/listar_subcategorias')
-def listar_subcategorias():
+@app.route('/IVM')
+def listar_IVMs():
   dbConn=None
   cursor=None
   try:
     dbConn = psycopg2.connect(DB_CONNECTION_STRING)
     cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
-    query = "SELECT * FROM retalhista"
+    query = "SELECT * FROM IVM"
     cursor.execute(query)
-    return render_template("retalhista.html", cursor=cursor, params=request.args)
+    return render_template("IVM.html", cursor=cursor, params=request.args)
   except Exception as e:
     return str(e) 
   finally:
+    cursor.close()
+    dbConn.close()
+
+@app.route('/IVM/listar_eventos')
+def listar_eventos():
+  try:
+    return render_template("listar_eventos.html", params=request.args)
+  except Exception as e:
+    return str(e)
+
+@app.route('/IVM/executar_listar_eventos', methods=["POST"])
+def executar_listar_eventos():
+  dbConn=None
+  cursor=None
+  try:
+    dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+    cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
+    query = "SELECT r.num_serie, r.fabricante, r.nro, r.ean, r.instante, p.nome, r.unidades \
+      FROM evento_reposicao AS r INNER JOIN prateleira AS p \
+      ON (r.nro = p.nro) AND (r.num_serie = p.num_serie) AND (r.fabricante = p.fabricante) \
+      WHERE r.num_serie = %s \
+      GROUP BY p.nome, r.unidades, r.num_serie, r.fabricante, r.nro, r.ean, r.instante;"
+    data = (request.form["num_serie"],)
+    cursor.execute(query,data)
+    return render_template("IVM_eventos.html", cursor=cursor, params=request.args)
+  except Exception as e:
+    return str(e)
+  finally:
+    dbConn.commit()
     cursor.close()
     dbConn.close()
 
