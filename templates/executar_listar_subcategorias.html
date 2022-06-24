@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Subcategorias</title>
+        <script>
+            function goBack() {
+              window.history.back();
+            }
+        </script>
+    </head>
+    <body style= "padding:20px">
+    
+        <h1>Subcategorias</h1>
+       
+        <div id="tabela">
+            <button onclick="window.history.go(-2)">Menu Categorias</button>
+        {% if cursor %}
+        <table id="eventos">
+            <thead>
+            <tr>
+            <th> Subcategorias </th>
+            </tr>
+        </thead>
+        {% for record in cursor %}
+        <tr>
+            <td> {{ record[0] }} </td>
+        </tr>
+        {% endfor %} 
+        </table>
+        </div>
+        {% else %}
+        <p> Erro: não foi possível obter dados da base de dados! </p>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,16 @@
+<html>
+    <body style="font-family: Arial, Helvetica, sans-serif">
+        <div>
+            <h1>Deseja ver as sub-categorias?</h1>
+            <form action="executar_listar_subcategorias" method="post">
+                <input type= "hidden" name="nome" value= "{{ params.get('nome') }}" />
+
+                <label>Categoria</label>
+                <input type="text" name="nome" value="{{ params.get('nome') }}" disabled/>
+
+                <input type="submit" value="Listar"/> <input type= "button" onclick="goBack()" value= "Cancelar"/>
+            </form>
+        </div>
+    </body>
+</html>
+<script>function goBack() {window.history.back();}</script>
